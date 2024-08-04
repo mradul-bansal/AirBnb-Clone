@@ -36,6 +36,11 @@ app.get("/listings", async (req, res) => {
     }
   });
 
+    //New Route
+app.get("/listings/new", (req, res) => {
+    res.render("listings/new.ejs");
+  });
+
 // Show Route
 app.get("/listings/:id", async (req, res) => {
     try {
@@ -50,6 +55,19 @@ app.get("/listings/:id", async (req, res) => {
       res.status(500).send("Error fetching listing");
     }
   });
+
+// Create Route
+app.post("/listings", async (req, res) => {
+    try {
+    const newListing = new Listing(req.body.listing);
+      await newListing.save();
+      res.redirect("/listings");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error creating listing");
+    }
+  });
+
 
 app.listen(8080, () => {
   console.log("Server is running on port 8080");
