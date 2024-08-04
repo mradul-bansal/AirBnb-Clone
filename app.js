@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const Listing = require("./models/listing.js");
 
 const MONGOURL = ("mongodb://127.0.0.1:27017/test");
 
@@ -19,6 +20,25 @@ async function main () {
 
 app.get("/", (req, res) =>{
     res.send("Hello World");
+});
+
+app.get("/testlisting", async (req, res) => {
+    let samplelisting = new Listing({
+        title: "Test Listing",
+        description: "This is a test listing",
+        image: "",
+        price: 1200,
+        location: "Test Location",
+        country: "Test Country",
+    });
+
+   await samplelisting.save()
+    .then((listing) => {
+        console.log("Saved");
+    })
+    .catch((err) => {
+        res.send(err);
+    });
 });
 
 app.listen(8080, () => {
