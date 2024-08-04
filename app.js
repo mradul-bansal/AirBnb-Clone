@@ -3,11 +3,13 @@ const app = express();
 const mongoose = require("mongoose");
 const Listing = require("./models/listings.js");
 const path = require("path");
+const methodOverride = require("method-override");
 
 const MONGOURL = "mongodb://127.0.0.1:27017/wanderlust";
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
 main()
   .then(() => {
@@ -67,6 +69,27 @@ app.post("/listings", async (req, res) => {
       res.status(500).send("Error creating listing");
     }
   });
+  // Edit Route
+app.get("/listings/:id/edit", async (req, res) => {
+    try {
+      const listing = await Listing.findById(req.params.id);
+      if (listing) {
+        res.render("listings/edit.ejs", { listing });
+      } else {
+        res.status(404).send("Listing not found");
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error fetching listing");
+    }
+  });
+
+    // Update Route
+app.put("/listings/:id", async (req, res) => {
+    let { id } = req.params;
+    await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    res.redirect("/listings");
+    });
 
 
 app.listen(8080, () => {
