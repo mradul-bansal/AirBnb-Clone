@@ -1,3 +1,14 @@
+body {
+ font-family: "Plus Jakarta Sans", sans-serif !important;
+ display: flex;
+ flex-direction: column;
+ min-height: 100vh;
+}
+
+.container{
+    flex: 1;
+}
+
 .navbar{
     height: 5rem;
     background-color: white;
@@ -25,8 +36,11 @@
     width: 100%;
 }
 
-.f-info-socials i{
+.f-info-socials a i {
     color: #000;
+  }
+
+.f-info-socials i{
     font-size: 1.3rem;
     margin-right: 1rem;
 }
@@ -39,4 +53,235 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: space-evenly;
+}
+
+/*-----CARDS------*/
+
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+    
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    }
+.card-body {
+    padding: 0 !important;
+    }
+.card-text p { 
+     font-weight: 400;
+    }
+
+.listing-link{
+    text-decoration: none;
+    }
+
+.card-img-overlay{
+  opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    color: white;
+  }
+
+  /* Container for the listing details */
+.listing-details-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.listing-details-container img {
+    width: 100%;
+    border-radius: 1rem;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.listing-details-container h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.listing-details-container p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.listing-details-container .price {
+    font-size: 1.5rem;
+    color: #000;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.listing-details-container .location, 
+.listing-details-container .country {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+.listing-details-container .btn {
+    font-size: 1rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    text-decoration: none;
+}
+
+.listing-details-container .btn-edit {
+    background-color: #fe424d;
+    color: white;
+    border: none;
+}
+
+.listing-details-container .btn-delete {
+    background-color: #222;
+    color: white;
+    border: none;
+}
+
+
+/* Container for the form */
+.listing-form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.listing-form-container h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.listing-form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.listing-form-container input[type="text"],
+.listing-form-container input[type="number"],
+.listing-form-container textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.listing-form-container textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.listing-form-container button {
+    background-color: #fe424d;
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100px;
+    align-self: flex-start;
+}
+
+.listing-form-container button:hover {
+    background-color: #e03941;
+}
+
+.listing-form-container .form-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.listing-form-container .form-group input[type="text"],
+.listing-form-container .form-group input[type="number"] {
+    width: 48%;
+}
+
+/* Container for the form */
+.edit-form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.edit-form-container h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.edit-form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-form-container input[type="text"],
+.edit-form-container input[type="number"],
+.edit-form-container textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.edit-form-container textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.edit-form-container button {
+    background-color: #fe424d;
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100px;
+    align-self: flex-start;
+}
+
+.edit-form-container button:hover {
+    background-color: #e03941;
+}
+
+.edit-form-container .form-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.edit-form-container .form-group input[type="text"],
+.edit-form-container .form-group input[type="number"] {
+    width: 48%;
 }
