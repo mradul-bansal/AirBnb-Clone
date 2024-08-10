@@ -28,7 +28,7 @@ main()
 
 async function main() {
   try {
-    await mongoose.connect(MONGOURL, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(MONGOURL, {});
   } catch (err) {
     console.error(err);
     process.exit(1); // Exit the process if MongoDB connection fails
@@ -43,6 +43,7 @@ app.get("/", (req, res) => {
 app.get("/listings", async (req, res) => {
   try {
     const allListings = await Listing.find({}).exec();
+    // console.log("alllistings",allListings);
     res.render("listings/index", { allListings });
   } catch (err) {
     console.error(err);

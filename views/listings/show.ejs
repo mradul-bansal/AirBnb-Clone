@@ -2,7 +2,7 @@
 <body>
     <h3>Listing Details</h3>
     <div class="listing-details-container">
-        <img src="<%= listing.image_url %>" alt="<%= listing.title %>">
+        <img src="<%= listing.image %>" alt="<%= listing.title %>">
         <h3><%= listing.title %></h3>
         <p><%= listing.description %></p>
         <div class="price">&#8377;<%= listing.price.toLocaleString("en-IN") %></div>
