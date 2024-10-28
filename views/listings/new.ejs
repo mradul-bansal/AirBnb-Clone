@@ -2,25 +2,28 @@
 <body>
     <div class="listing-form-container">
         <h3>Create a New Listing</h3>
-        <form method="POST" action="/listings">
-            <input name="listing[title]" placeholder="Add a catchy title" type="text" />
+        <form method="POST" action="/listings" class="needs-validation">
+            <input name="listing[title]" placeholder="Add a catchy title" type="text" required/>
             <textarea
               name="listing[description]"
               placeholder="Description"
+              required
             ></textarea>
             <input
               name="listing[image]"
               placeholder="Image Link"
               type="text"
+              required
             />
             <div class="form-group">
-                <input name="listing[price]" placeholder="Price" type="number" />
-                <input name="listing[country]" placeholder="Country" type="text" />
+                <input name="listing[price]" placeholder="Price" type="number" required/>
+                <input name="listing[country]" placeholder="Country" type="text" required/>
             </div>
             <input
               name="listing[location]"
               placeholder="Location"
               type="text"
+              required
             />
             <button>Add</button>
           </form>
