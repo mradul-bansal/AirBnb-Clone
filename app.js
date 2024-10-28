@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js")
 const ExpressError = require("./utils/ExpressError.js")
+const { listingSchema } = require("./schema.js")
 
 const MONGOURL = "mongodb://127.0.0.1:27017/wanderlust";
 
@@ -35,6 +36,14 @@ async function main() {
     console.error(err);
     process.exit(1); // Exit the process if MongoDB connection fails
   }
+}
+
+const validateListing = (req, res, next) => {
+  let {error} = listingSchema.validate(req.body);
+  if(error){
+    throw new ExpressError(400, error);
+  }
+  next();
 }
 
 // Index Route
@@ -74,11 +83,8 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 // Create Route
-app.post("/listings", wrapAsync(async (req, res) => {
-    const { listing } = req.body;
-    if (!listing) {
-      throw new Error("Invalid request body");
-    }
+app.post("/listings", validateListing, wrapAsync(async (req, res) => {
+    
     const newListing = new Listing(listing);
     await newListing.save();
     res.redirect("/listings")
@@ -100,13 +106,10 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
 }));
 
 // Update Route
-app.put("/listings/:id", wrapAsync(async (req, res) => {
+app.put("/listings/:id", validateListing, wrapAsync(async (req, res) => {
   try {
     const { id } = req.params;
     const { listing } = req.body;
-    if (!listing) {
-      throw new Error("Invalid request body");
-    }
     await Listing.findByIdAndUpdate(id, listing, { new: true });
     res.redirect(`/listings/${id}`);
   } catch (err) {
@@ -131,6 +134,7 @@ app.all("*", (req, res, next) =>{
 })
 
 app.use((err, req, res, next) => {
-  let { statusCode, message} = err;
-  res.status(statusCode).send(message);
+  let { statusCode=500, message="Something Went Wrong!"} = err;
+  // res.status(statusCode).send(message);
+  res.status(statusCode).render("error.ejs", {message});
 });
